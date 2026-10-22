@@ -5,6 +5,8 @@ require_once './vendor/autoload.php';
 use App\Services\Cart;
 use App\Models\Product;
 use App\Helpers\Money;
+use App\Services\EmailService;
+use App\Services\OrderService;
 use App\Services\TaxCalculator;
 
 // echo "Hola mundo" . PHP_EOL;
@@ -37,5 +39,8 @@ $cart->showCart();
 $subtotal = $cart->subtotal();
 $total = $cart->total();
 
-echo "Subtotal: " . Money::format($subtotal) . PHP_EOL;
-echo "Total: " . Money::format($total) . PHP_EOL;
+// echo "Subtotal: " . Money::format($subtotal) . PHP_EOL;
+// echo "Total: " . Money::format($total) . PHP_EOL;
+
+$order = new OrderService(new EmailService());
+$order->createOrder();
